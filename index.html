@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart Health Check</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  margin:0;padding:0;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  background:#ffffff;color:#1B3A2F;
+}
+.widget{max-width:480px;margin:0 auto;padding:24px 20px 28px}
+.widget-title{font-size:18px;font-weight:700;color:#1B3A2F;margin-bottom:4px}
+.widget-sub{font-size:13px;color:#5C7A6E;margin-bottom:20px}
+.signs{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.sign-btn{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 16px;border:1.5px solid #C8DDD5;border-radius:12px;
+  background:#ffffff;cursor:pointer;text-align:left;width:100%;
+  transition:border-color 0.18s,background 0.18s;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-appearance:none;appearance:none;
+}
+.sign-btn:hover{border-color:#1B3A2F;background:#EDF4F0}
+.sign-btn.active{border-color:#1B3A2F;background:#1B3A2F}
+.sign-btn.active .sign-label{color:#ffffff}
+.sign-check{
+  width:22px;height:22px;border-radius:6px;border:1.5px solid #C8DDD5;
+  background:#ffffff;flex-shrink:0;display:flex;align-items:center;
+  justify-content:center;transition:border-color 0.18s;
+}
+.sign-btn.active .sign-check{border-color:#ffffff}
+.check-icon{display:none;width:12px;height:10px}
+.sign-btn.active .check-icon{display:block}
+.sign-label{font-size:14px;font-weight:500;color:#1B3A2F;line-height:1.4}
+.progress-track{
+  height:6px;background:#EDF4F0;border-radius:99px;
+  overflow:hidden;margin-bottom:6px;
+}
+.progress-fill{
+  height:100%;background:#1B3A2F;border-radius:99px;
+  width:0%;transition:width 0.3s ease;
+}
+.progress-label{font-size:12px;color:#5C7A6E;text-align:right;margin-bottom:16px}
+.result{
+  border-radius:12px;background:#EDF4F0;padding:18px 20px;
+  text-align:center;transition:background 0.3s ease;
+}
+.result.done{background:#1B3A2F}
+.result-status{
+  font-size:15px;font-weight:700;color:#1B3A2F;
+  margin-bottom:4px;transition:color 0.3s;
+}
+.result.done .result-status{color:#ffffff}
+.result-detail{font-size:13px;color:#5C7A6E;transition:color 0.3s}
+.result.done .result-detail{color:#A8C9BC}
+.result-cta{
+  display:inline-block;margin-top:14px;padding:10px 22px;
+  background:#ffffff;color:#1B3A2F;font-size:13px;font-weight:700;
+  border-radius:99px;text-decoration:none;transition:opacity 0.2s;
+}
+.result-cta:hover{opacity:0.85}
+</style>
+</head>
+<body>
+ 
+<div class="widget">
+  <p class="widget-title">Cart Health Check</p>
+  <p class="widget-sub">Tap everything you are noticing right now.</p>
+ 
+  <div class="signs">
+ 
+    <button class="sign-btn" onclick="toggle(this)">
+      <span class="sign-check">
+        <svg class="check-icon" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5L4.5 8.5L11 1.5" stroke="#1B3A2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="sign-label">Vapor production has decreased</span>
+    </button>
+ 
+    <button class="sign-btn" onclick="toggle(this)">
+      <span class="sign-check">
+        <svg class="check-icon" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5L4.5 8.5L11 1.5" stroke="#1B3A2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="sign-label">Little to no oil visible in the chamber</span>
+    </button>
+ 
+    <button class="sign-btn" onclick="toggle(this)">
+      <span class="sign-check">
+        <svg class="check-icon" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5L4.5 8.5L11 1.5" stroke="#1B3A2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="sign-label">Dry hits are more frequent</span>
+    </button>
+ 
+    <button class="sign-btn" onclick="toggle(this)">
+      <span class="sign-check">
+        <svg class="check-icon" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5L4.5 8.5L11 1.5" stroke="#1B3A2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="sign-label">Burnt or harsh taste on the draw</span>
+    </button>
+ 
+    <button class="sign-btn" onclick="toggle(this)">
+      <span class="sign-check">
+        <svg class="check-icon" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5L4.5 8.5L11 1.5" stroke="#1B3A2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="sign-label">Mouthpiece feels clogged or sticky</span>
+    </button>
+ 
+    <button class="sign-btn" onclick="toggle(this)">
+      <span class="sign-check">
+        <svg class="check-icon" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5L4.5 8.5L11 1.5" stroke="#1B3A2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="sign-label">Oil at the bottom looks dark</span>
+    </button>
+ 
+  </div>
+ 
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <p class="progress-label" id="progressLabel">0 / 6 signs</p>
+ 
+  <div class="result" id="result">
+    <p class="result-status" id="resultStatus">Tap the signs above to check your cart.</p>
+    <p class="result-detail" id="resultDetail">Your cart status will appear here.</p>
+  </div>
+</div>
+ 
+<script>
+var states=[
+  {status:"Tap the signs above to check your cart.",detail:"Your cart status will appear here.",urgent:false,cta:false},
+  {status:"Still going strong.",detail:"Just one sign. Your cart has plenty of life left.",urgent:false,cta:false},
+  {status:"Keep an eye on it.",detail:"A couple of signs — enjoy what you have but start thinking ahead.",urgent:false,cta:false},
+  {status:"Running low.",detail:"More than halfway through the signs. Your cart is winding down.",urgent:false,cta:true},
+  {status:"Almost done.",detail:"Four signs checked. Time to start browsing for a new one.",urgent:false,cta:true},
+  {status:"On its last legs.",detail:"Five signs. A fresh pen is calling your name.",urgent:true,cta:true},
+  {status:"It is done. Officially.",detail:"Six for six. Your cart is empty. Time to move on.",urgent:true,cta:true}
+];
+ 
+function toggle(btn){
+  btn.classList.toggle("active");
+  var count=document.querySelectorAll(".sign-btn.active").length;
+  document.getElementById("progressFill").style.width=Math.round((count/6)*100)+"%";
+  document.getElementById("progressLabel").textContent=count+" / 6 signs";
+  var s=states[count];
+  var el=document.getElementById("result");
+  document.getElementById("resultStatus").textContent=s.status;
+  document.getElementById("resultDetail").textContent=s.detail;
+  s.urgent?el.classList.add("done"):el.classList.remove("done");
+  var old=el.querySelector(".result-cta");
+  if(old)old.remove();
+  if(s.cta){
+    var a=document.createElement("a");
+    a.href="https://mood.com/shop/product-category/vapes";
+    a.target="_blank";a.rel="noopener noreferrer";
+    a.className="result-cta";a.textContent="Shop Vapes at Mood";
+    el.appendChild(a);
+  }
+}
+</script>
+</body>
+</html>
